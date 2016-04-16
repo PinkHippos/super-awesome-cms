@@ -1,6 +1,6 @@
 q = require 'q'
 passport = require 'passport'
-GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
+LocalStrategy = require('passport-local').Strategy
 _ = require 'lodash'
 
 {getUser, createUser} = require "#{__dirname}/userCtrl"
@@ -43,7 +43,7 @@ module.exports =
         .catch (err)->
           sendErr err, res
     else
-      res.redirect '/api/auth/google'
+      res.redirect '/api/auth/login'
 
   ##### logout #####
   # Logs out the user
@@ -54,62 +54,6 @@ module.exports =
     res
       .status 204
       .redirect '/'
-
-  ##### googleLogin #####
-  # Authenticates using google oAuth
-  # This uses a custom callback so we can handle for errs after done is called
-  googleLogin: (req, res, next)->
-    passport.authenticate('google', (err, user, info)->
-      if err
-        sendErr err, res
-      if user
-        req.logout()
-        req.login user, (err)->
-          if err
-            sendErr err, res
-          else
-            status = 200
-            if info.new
-              status = 201
-            res
-              .status status
-              .redirect '/'
-    )(req,res,next)
-
-  ##### googleAuth #####
-  # Sets up the auth strategy with google.
-  googleAuth: new GoogleStrategy
-    clientID: process.env.G_CLIENT_ID
-    clientSecret: process.env.G_CLIENT_SECRET
-    callbackURL: "#{process.env.G_CALLBACK}/api/auth/google/callback"
-  ,(token, refreshToken, profile, done)->
-    ###
-      Finds the matching user in the DB using the google info returned
-      and logs in that user.
-    ###
-    query = User.filter r.row('auth')('google')('id').eq profile.id
-    crudRead query
-      .then (user)->
-        done null, user, new: false
-      .catch (err)->
-        if err.status is 404
-          ###
-            If no user is found then we can create a new one and log them in.
-          ###
-          newUser =
-            auth:
-              google:
-                id: profile.id
-                token: token
-                name: profile.displayName
-                email: profile.emails[0].value
-          createUser newUser
-            .then (createdUser)->
-              done null, createdUser, new: true
-            .catch (err)->
-              done err, false
-        else
-          done err, false
 
   ##### roleCheck #####
   # Ensures the user has proper permissions.

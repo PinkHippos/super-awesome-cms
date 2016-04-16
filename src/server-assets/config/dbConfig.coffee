@@ -5,8 +5,6 @@ redisOpts =
   port: process.env.REDIS_PORT
   pass: process.env.REDIS_PASS
 
-
-
 thinkyOpts =
   authKey: process.env.SSH_TUNNEL_AUTHKEY
   db: process.env.DB_NAME

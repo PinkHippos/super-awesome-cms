@@ -1,6 +1,5 @@
 q = require 'q'
 passport = require 'passport'
-GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 _ = require 'lodash'
 
 {getUser, createUser} = require "#{__dirname}/userCtrl"

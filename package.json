@@ -22,17 +22,19 @@
     "angular-sanitize": "^1.5.3",
     "angular-ui-router": "^0.2.18",
     "body-parser": "^1.15.0",
-    "coffee": "^3.2.1",
+    "coffee-script": "^1.10.0",
     "connect-redis": "^3.0.2",
     "cookie-parser": "^1.4.1",
     "cors": "^2.7.1",
     "express": "^4.13.4",
     "express-session": "^1.13.0",
     "gulp": "^3.9.1",
+    "gulp-env": "^0.4.0",
     "lodash": "^4.11.1",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "q": "^1.4.1",
+    "run-sequence": "^1.1.5",
     "thinky": "^2.2.7"
   }
 }

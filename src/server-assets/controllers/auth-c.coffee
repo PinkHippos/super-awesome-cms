@@ -1,6 +1,5 @@
 q = require 'q'
 passport = require 'passport'
-LocalStrategy = require('passport-local').Strategy
 _ = require 'lodash'
 
 {getUser, createUser} = require "#{__dirname}/userCtrl"

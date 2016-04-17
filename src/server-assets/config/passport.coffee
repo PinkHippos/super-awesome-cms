@@ -1,3 +1,4 @@
+LocalStrategy = require('passport-local').Strategy
 module.exports = (passport) ->
   ###
     Passport uses serialize and deserialize to manage the logged in User
@@ -13,11 +14,13 @@ module.exports = (passport) ->
     done null, info
 
   passport.deserializeUser (info, done)->
-    query = User.filter r.row('auth')('google')('id').eq info.googleId
+    # NOTE: change query to fit local auth
+    # query = User.filter r.row('auth')('google')('id').eq info.googleId
     crudRead query
       .then (user)->
         done null, user
       .catch (e)->
         done null, {msg: 'User not found', status: 404}
 
-  passport.use 'local', localAuth
+  # NOTE: add localAuth strategy
+  # passport.use 'local', new LocalAuth

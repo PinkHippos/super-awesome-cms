@@ -1,6 +1,8 @@
 q = require 'q'
-{User} = require "#{__dirname}/../models/"
+
+{User}                 = require "#{__dirname}/../models/"
 {crudCreate, crudRead} = require "#{__dirname}/../helpers/crudHelper"
+
 module.exports =
     ##### createUser #####
   # Creates new user

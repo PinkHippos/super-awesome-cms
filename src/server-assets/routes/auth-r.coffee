@@ -1,12 +1,12 @@
-q = require 'q'
+q        = require 'q'
+_        = require 'lodash'
 passport = require 'passport'
-_ = require 'lodash'
 
+{r}                   = require "#{__dirname}/../config/dbConfig"
+{User}                = require "#{__dirname}/../models"
+{crudRead}            = require "#{__dirname}/../helpers/crudHelper"
+{handleErr, sendErr}  = require "#{__dirname}/../helpers/util"
 {getUser, createUser} = require "#{__dirname}/userCtrl"
-{crudRead} = require "#{__dirname}/../helpers/crudHelper"
-{handleErr, sendErr} = require "#{__dirname}/../helpers/util"
-{User} = require "#{__dirname}/../models"
-{r} = require "#{__dirname}/../config/dbConfig"
 
 
 module.exports =

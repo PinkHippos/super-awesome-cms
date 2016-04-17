@@ -1,15 +1,14 @@
-bodyParser = require 'body-parser'
+cors         = require 'cors'
+express      = require 'express'
+passport     = require 'passport'
+bodyParser   = require 'body-parser'
 cookieParser = require 'cookie-parser'
-cors  = require 'cors'
-express = require 'express'
-passport = require 'passport'
-session = require 'express-session'
-RedisStore = require('connect-redis') session
+session      = require 'express-session'
+RedisStore   = require('connect-redis') session
 
-{googleAuth} = require "#{__dirname}/../controllers/authCtrl"
+
+{googleAuth}   = require "#{__dirname}/../controllers/authCtrl"
 {r, redisOpts} = require "#{__dirname}/dbConfig"
-{crudRead} = require "#{__dirname}/../helpers/crud"
-{User} = require "#{__dirname}/../models"
 
 module.exports = (app)->
   ######
